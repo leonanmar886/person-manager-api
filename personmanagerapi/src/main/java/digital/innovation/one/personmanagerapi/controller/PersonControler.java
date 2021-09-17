@@ -1,5 +1,6 @@
 package digital.innovation.one.personmanagerapi.controller;
 
+import digital.innovation.one.personmanagerapi.dto.MessageResponseDTO;
 import digital.innovation.one.personmanagerapi.entity.Person;
 import digital.innovation.one.personmanagerapi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,12 @@ public class PersonControler {
     }
 
     @PostMapping
-    public String createPerson(@RequestBody Person person){
+    public MessageResponseDTO createPerson(@RequestBody Person person){
         Person savedPerson = personRepository.save(person);
-        return "Deu certo";
+        return MessageResponseDTO
+                .builder()
+                .message("Created person with ID:" + savedPerson.getId())
+                .build();
     }
 
 }
