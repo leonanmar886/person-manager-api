@@ -2,6 +2,7 @@ package digital.innovation.one.personmanagerapi.controller;
 
 import digital.innovation.one.personmanagerapi.dto.request.PersonDTO;
 import digital.innovation.one.personmanagerapi.dto.response.MessageResponseDTO;
+import digital.innovation.one.personmanagerapi.exception.PersonNotFoundExeption;
 import digital.innovation.one.personmanagerapi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,10 @@ public class PersonControler {
     @GetMapping
     public List<PersonDTO> listAll(){
         return personService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundExeption {
+        return personService.findById(id);
     }
 }
